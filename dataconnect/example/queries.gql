@@ -1,0 +1,38 @@
+mutation CreateNeighborhood {
+  neighborhood_insert(data: {
+    name: "Downtown",
+    postalCode: "94105"
+  })
+}
+
+mutation CreatePost($title: String!, $description: String!) @auth(level: USER) {
+  post: post_insert(data: {
+    title: $title,
+    description: $description,
+    type: "Help",
+    status: "Open",
+    createdById_expr: "auth.uid",
+    neighborhood: {id: "00000000-0000-0000-0000-000000000000"}
+  })
+}
+
+mutation SendMessage($postId: UUID!, $receiverId: UUID!, $content: String!) @auth(level: USER) {
+  message_insert(data: {
+    postId: $postId,
+    receiverId: $receiverId,
+    senderId_expr: "auth.uid",
+    content: $content,
+    timestamp_expr: "request.time"
+  })
+}
+
+query ListMyPosts @auth(level: USER) {
+  posts(where: {createdById: {eq_expr: "auth.uid"}}) {
+    id
+    title
+    status
+    neighborhood {
+      name
+    }
+  }
+}

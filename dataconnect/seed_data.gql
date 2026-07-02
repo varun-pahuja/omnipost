@@ -1,0 +1,33 @@
+mutation CreateSeedData @transaction {
+  user_insertMany(data: [
+    {
+      id: "770e8400-e29b-41d4-a716-446655440000",
+      fullName: "Alice Neighborhood",
+      email: "alice@example.com",
+      homeAddress: "123 Maple St"
+    },
+    {
+      id: "770e8400-e29b-41d4-a716-446655440001",
+      fullName: "Bob Helper",
+      email: "bob@example.com",
+      homeAddress: "456 Oak St"
+    }
+  ])
+  neighborhood_insertMany(data: [
+    {
+      id: "880e8400-e29b-41d4-a716-446655440000",
+      name: "Sunnyvale",
+      postalCode: "94086"
+    }
+  ])
+  post_insertMany(data: [
+    {
+      id: "990e8400-e29b-41d4-a716-446655440000",
+      title: "Need help moving",
+      type: "Help",
+      status: "Open",
+      createdById: "770e8400-e29b-41d4-a716-446655440000",
+      neighborhoodId: "880e8400-e29b-41d4-a716-446655440000"
+    }
+  ])
+}

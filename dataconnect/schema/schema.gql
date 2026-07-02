@@ -1,0 +1,44 @@
+type User @table {
+  fullName: String!
+  email: String!
+  homeAddress: String!
+  phoneNumber: String
+  bio: String
+  profileImageUrl: String
+  neighborhood: Neighborhood
+}
+
+type Neighborhood @table {
+  name: String!
+  postalCode: String!
+  city: String
+  description: String
+}
+
+type Post @table {
+  title: String!
+  type: String! # e.g., "Help" or "Borrow"
+  status: String!
+  description: String
+  imageURL: String
+  category: String
+  createdBy: User!
+  neighborhood: Neighborhood!
+}
+
+type Transaction @table {
+  status: String! # e.g., "Requested", "Accepted", "Completed"
+  startDate: Date
+  endDate: Date
+  post: Post!
+  helper: User
+}
+
+type Message @table {
+  content: String!
+  timestamp: Timestamp!
+  attachmentURL: String
+  sender: User!
+  receiver: User!
+  post: Post!
+}
