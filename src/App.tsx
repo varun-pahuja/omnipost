@@ -3,6 +3,7 @@ import { Copy, Instagram, Linkedin, Loader2, Sparkles, Twitter, Check, RefreshCw
 import ReactMarkdown from "react-markdown";
 import { useAuth } from "./contexts/AuthContext";
 import { ChatbotWidget } from "./components/ChatbotWidget";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import { collection, addDoc, getDocs, query, where, orderBy, serverTimestamp } from "firebase/firestore";
 
@@ -482,6 +483,7 @@ export default function App() {
       </main>
 
       <ChatbotWidget />
+      <SpeedInsights />
     </div>
   );
 }
